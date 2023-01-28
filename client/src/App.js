@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={() => setCount(count + 1)} />
+        <button className="bg-slate-600 px-4 py-2 rounded-[15px]" onClick={() => setCount(count + 1)}>ADD</button>
         <Counter count={count} />
       </header>
     </div>
