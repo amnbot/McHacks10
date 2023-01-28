@@ -4,6 +4,8 @@ import './App.css';
 import Counter from "./components/Counter";
 import TemporaryDrawer from "./UI/Sidebar";
 
+import teamPage from "./UI/Teampage";
+
 function App() {
   const [count, setCount] = useState(0)
   
