@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -13,7 +13,10 @@ import ShuffleIcon from '@mui/icons-material/Shuffle';
 
 export default function Shortcuts({camId, setCamId}) {
   const [value, setValue] = React.useState(0);
-
+  useEffect(() => {
+    console.log(value, 'new value')
+    setCamId(value)
+  }, [value])
   return (
     <Box sx={{ width: 500 }}>
       <BottomNavigation
