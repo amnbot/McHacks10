@@ -42,21 +42,22 @@ export default function TemporaryDrawer() {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
+      style={{backgroundColor: '#2a2e3d', height: '100%', overflow: "hidden"}}
     >
-      <List>
+      <List style={{marginLeft: 2}}>
         {[{ name: 'Home', icon: <HomeIcon />, path: '/' },
         { name: 'Plans', icon: <MapIcon />, path: '/plans' },
         { name: 'Team', icon: <GroupsIcon />, path: '/team' },
         { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
-          <ListItem key={name} disablePadding>
+          <ListItem style={{marginLeft: 10}} key={name} disablePadding>
             <Link to={path}>
               <div className='flex flex-row my-2'>
-                <div className='flex ml-1 mt-1 align-middle'>
-                  <ListItemIcon>
+                <div className='flex ml-1 align-middle'>
+                  <ListItemIcon style={{color: 'white'}}>
                     {icon}
                   </ListItemIcon>
                 </div>
-                <ListItemText style={{fontWeight: 'bold'}} primary={name} />
+                <h1 className='font-bold text-white align-middle'>{name}</h1>
               </div>
             </Link>
           </ListItem>
@@ -67,10 +68,10 @@ export default function TemporaryDrawer() {
         {['Sign out'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
+              <ListItemIcon style={{color: 'white'}}>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              </ListItemIcon >
+              <h1 className='font-bold text-white align-middle'>Sign Out</h1>
             </ListItemButton>
           </ListItem>
         ))}
@@ -82,8 +83,8 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button  className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
-            <ListIcon />
+          <Button style={{ width: 50, height: 60, backgroundColor: '#3d7bf8' }} sx={{borderRadius: 50, padding: '5px 5px', marginTop: 2, marginLeft: 2}}  className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
+            <ListIcon style={{color: 'white'}} />
           </Button>
           <Drawer
             anchor={anchor}
