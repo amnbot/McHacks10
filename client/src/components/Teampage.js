@@ -7,43 +7,23 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Header from '../UI/Header';
 
 export default function TeamPage() {
+
+  const team = [{ name: "Paul Touma", location: 'Cam1' }, { name: "Rayan", location: "Camera2" }, { name: "Aymen", location: "Floor1" }, { name: "Moncef", location: "Floor2" }];
+  const teamList = team.map(({ name, location }) =>
+    <div className=''>
+      <div className='bg-white rounded-[50%] w-[40px] h-[40px]'>
+        <Avatar />
+      </div>
+      <h1 className='text-white'>{name}</h1>
+      <h1 className='text-white'>{location}</h1>
+    </div>
+  );
   return (
     <div>
       <Header />
-      <List
-        row
-        variant="outlined"
-        sx={{
-          bgcolor: 'background.body',
-          borderRadius: 'sm',
-          boxShadow: 'sm',
-          flexGrow: 0,
-          mx: 'auto',
-          '--List-decorator-size': '48px',
-          '--List-item-paddingY': '1rem',
-        }}
-      >
-        <ListItem>
-          <ListItemDecorator sx={{ alignSelf: 'flex-start' }}>
-            <Avatar size="sm" src="/static/images/avatar/1.jpg" />
-          </ListItemDecorator>
-          Mabel Boyle
-        </ListItem>
-        <ListDivider inset="gutter" />
-        <ListItem>
-          <ListItemDecorator sx={{ alignSelf: 'flex-start' }}>
-            <Avatar size="sm" src="/static/images/avatar/2.jpg" />
-          </ListItemDecorator>
-          Boyd Burt
-        </ListItem>
-        <ListDivider inset="gutter" />
-        <ListItem>
-          <ListItemDecorator sx={{ alignSelf: 'flex-start' }}>
-            <Avatar size="sm" src="/static/images/avatar/3.jpg" />
-          </ListItemDecorator>
-          Adam Tris
-        </ListItem>
-      </List>
+      <div className='flex bg-gray-500 w-[30%] h-[30%] p-4 rounded-[15px] flex-row justify-center items-center align-middle text-center my-10 space-x-4'>
+        {teamList}
+      </div>
     </div>
   );
 }
