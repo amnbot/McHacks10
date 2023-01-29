@@ -55,16 +55,18 @@ export default function FormPlans() {
       <Header />
       <div className='flex flex-col my-10 justify-center items-center text-center text-white'>
         <Box
+          style={{backgroundColor: '#2a2e3d'}}
           onSubmit={addPlan}
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 4, width: '25ch' },
+            '& .MuiTextField-root': { m: 4, width: '25ch' }, padding: '3px 3px', borderRadius: 3
           }}
           noValidate
           autoComplete="off"
         >
           <div>
             <TextField
+            sx={{color: 'white'}}
               required
               id="outlined-required"
               label="Name"
