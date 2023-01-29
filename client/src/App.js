@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="team" element={<TeamPage />} />
-        <Route path='planCreation' element={<SearchGrid />} />
+        <Route path='plans' element={<SearchGrid />} />
       </Routes>
     </BrowserRouter>
   );

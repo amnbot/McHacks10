@@ -45,7 +45,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {[{ name: 'Home', icon: <HomeIcon />, path: '/' },
-        { name: 'Plans', icon: <MapIcon />, path: '/planCreation' },
+        { name: 'Plans', icon: <MapIcon />, path: '/plans' },
         { name: 'Teams', icon: <GroupsIcon />, path: '/team' },
         { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
           <ListItem key={name} disablePadding>
