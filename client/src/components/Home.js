@@ -13,13 +13,37 @@ export default function Home({ camId = 0 }) {
 
   // const [heatmap, setHeatmap] = useState(heatmapInstance)
   useEffect(() => {
-    setInterval(() => {
-      fetch('http://127.0.0.1:5000/snapshot?camId=' + currCamId).then(res => res.json()).then(res => {
-        // console.log(res)
-        setPoints(res)
-        setCount(res.length)
-      })
-    }, 3000)
+    console.log(currCamId, 'new cam id')
+    const interval = setInterval(() => {
+      if (currCamId <= -1) {
+
+        fetch('http://127.0.0.1:5000/snapshot?camId=' + currCamId).then(res => res.json()).then(res => {
+          // console.log(res)
+          setPoints(res)
+        })
+      } else {
+        var mockPoints = [];
+        var max = 2;
+        var width = 640;
+        var height = 480;
+        var len = 200;
+
+        while (len--) {
+          var val = Math.floor(Math.random() * 100);
+          max = Math.max(max, val);
+          var point = {
+            x: Math.floor(Math.random() * width),
+            y: Math.floor(Math.random() * height),
+            value: val
+          };
+          mockPoints.push(point);
+        }
+        // heatmap data format
+        setPoints(mockPoints)
+      }
+    }, 10000)
+
+    return () => clearInterval(interval)
   }, [currCamId])
 
   useEffect(() => {
@@ -52,6 +76,7 @@ export default function Home({ camId = 0 }) {
     // if you have a set of datapoints always use setData instead of addData
     // for data initialization
     heatmapInstance.setData(data);
+    setCount(points.length)
     setHeatmap(prev => {
       if (prev !== undefined && prev !== null) {
         prev.setData({ max: 0, data: [] })
@@ -59,23 +84,23 @@ export default function Home({ camId = 0 }) {
 
       return heatmapInstance
     })
-
-    setInterval(() => { })
-  }, [points, currCamId, heatmap])
+  }, [points, currCamId])
 
   return (
     <div>
       <Header />
-      <div className='bg-slate-600 rounded-[15px] text-white w-[15%] h-[25%] text-center'>
-        <h1>Floor 1</h1>
-        <h2>Capacity: {count}/100</h2>
-      </div>
-      <div>
-        <div className='Heatmap'>
-          <canvas width={640} height={480} />
+      <div className='flex flex-col gap-y-5 justify-center align-middle items-center'>
+        <div className='bg-[#ecececee] rounded-[15px] text-black w-[50%] h-[50%] text-center'>
+          <h1>Floor 1</h1>
+          <h2>Capacity: {count}/100</h2>
         </div>
+        <div>
+          <div className='Heatmap'>
+            <canvas className='bg-white rounded-[15px]' width={640} height={480} />
+          </div>
+        </div>
+        <Shortcuts camId={currCamId} setCamId={setCamId} />
       </div>
-      <Shortcuts camId={currCamId} setCamId={setCamId} />
     </div>
   )
 }
