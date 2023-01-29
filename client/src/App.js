@@ -8,6 +8,7 @@ import FormPlans from "./components/FormPlans";
 import TeamPage from "./components/Teampage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from "./components/Home";
+import SearchGrid from "./UI/SearchGrid";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="team" element={<TeamPage />} />
-        <Route path='planCreation' element={<FormPlans />} />
+        <Route path='planCreation' element={<SearchGrid />} />
       </Routes>
     </BrowserRouter>
   );
