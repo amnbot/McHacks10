@@ -13,6 +13,12 @@ app = Flask(__name__)
 CORS(app)
 PD = PoseDetector()
 
+cam_id_to_ip = {
+    "0": 0,
+    "1": "http://10.122.19.79:8080/video",
+    "2": "http://10.217.85.120:8080/video"
+}
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
@@ -21,7 +27,7 @@ def hello_world():
 def snapshot():
     if request.method == "GET":
         cam_id = request.args.get("camId")
-        cap = cv2.VideoCapture(int(cam_id))
+        cap = cv2.VideoCapture(cam_id_to_ip[cam_id])
         index = 0
         keypoints_with_scores = []
         while cap.isOpened():
@@ -29,7 +35,8 @@ def snapshot():
             ret, frame = cap.read()
             
             # Resize image
-            img = frame.copy()
+            imgRs = cv2.resize(frame, (640, 480))
+            img = imgRs.copy()
             img = tf.image.resize_with_pad(tf.expand_dims(img, axis=0), 384,640)
             input_img = tf.cast(img, dtype=tf.int32)
             
@@ -38,7 +45,7 @@ def snapshot():
             keypoints_with_scores = results['output_0'].numpy()[:,:,:51].reshape((6,17,3))
             
             # Render keypoints 
-            PD.loop_through_people(frame, keypoints_with_scores, PD.EDGES, 0.1)
+            PD.loop_through_people(imgRs, keypoints_with_scores, PD.EDGES, 0.1)
             
             # cv2.imshow('Movenet Multipose', imRs)
             index += 1

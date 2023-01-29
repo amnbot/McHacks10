@@ -74,7 +74,7 @@ class PoseDetector:
         if sum > 0:
             x_,y_ = sum_x/sum, sum_y/sum
             cv2.circle(frame, (int(kx), int(ky)), 6, (255,0,0), -1)
-        return x_, y_
+        return {'x': x_, 'y': y_}
 
     def getResults(self, input_img):
         return self.movenet(input_img)

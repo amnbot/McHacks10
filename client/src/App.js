@@ -3,11 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from "./components/Counter";
 import TemporaryDrawer from "./UI/Sidebar";
-import FormPlans from "./UI/FormPlans";
+import FormPlans from "./components/FormPlans";
 
 import TeamPage from "./components/Teampage";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from "./components/Home";
+
 function App() {
 
   return (
