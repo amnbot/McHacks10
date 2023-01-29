@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="team" element={<TeamPage />} />
-        <Route path='plans' element={<FormPlans />} />
+        <Route path='planCreation' element={<FormPlans />} />
       </Routes>
     </BrowserRouter>
   );
