@@ -23,7 +23,8 @@ export default function TeamPage() {
   }
 
   const handleKeyPress = (e) => {
-    if (e.keyCode === 13 && e.target.value) setMessages(prev => prev = [...prev, { msg: e.target.value, name: "Aymen Ouali" }]);
+    console.log(e.target.value);
+    if (e.keyCode === 13 && e.target.value) setMessages(prev => prev = [{ msg: e.target.value, name: "Aymen Ouali" }, ...prev]);
   }
 
 
@@ -49,8 +50,8 @@ export default function TeamPage() {
         </div>
         <div className='flex flex-col bg-[#2a2e3d] w-[30%] py-4 m-auto rounded-[15px] text-[#e8e8ff] justify-items-center justify-center items-center align-middle my-10'>
           <div className='flex flex-col-reverse'>
-            {chatLog.map(({ name, msg }) => (
-              <div className='flex flex-row my-3 test-left'>
+            {messages.map(({ name, msg }) => (
+              <div className='flex flex-row my-3 test-left overflow-hidden max-h-[40%]'>
                 <h1><b>{name}:</b> {msg}</h1>
               </div>
             ))}
