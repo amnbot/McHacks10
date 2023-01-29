@@ -46,7 +46,7 @@ const [filteredData, setFilteredData] = useState(bhys);
         value={searchTerm}
         onChange={handleChange}
       /> */}
-  <TextField onChange={handleChange} fullWidth label="Search" id="fullWidth" color = "info" />
+  <TextField onChange={handleChange} fullWidth label="Search" id="fullWidth" color = "info"/>
         {filteredData.map(({icon, label}) => {
             return (
                 <div className='flex flex-col text-center text-white'>
