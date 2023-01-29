@@ -4,13 +4,17 @@ import Counter from "./Counter";
 import Header from '../UI/Header';
 import Shortcuts from '../UI/Shortcuts';
 import h337 from 'heatmapjs';
+import { useLocation } from 'react-router-dom';
 
-export default function Home({ camId = 0 }) {
+export default function Home() {
   const [count, setCount] = useState(0)
-  const [points, setPoints] = useState([])
-  const [currCamId, setCamId] = useState(camId)
+  const [points, setPoints] = useState([])  
   const [heatmap, setHeatmap] = useState(null)
-
+  const location = useLocation()
+  const camId = location.state.camId
+  const cap = location.state.cap
+  const imgPath = location.state.imgPath
+  const [currCamId, setCamId] = useState(camId)
   // const [heatmap, setHeatmap] = useState(heatmapInstance)
   useEffect(() => {
     console.log(currCamId, 'new cam id')
@@ -92,7 +96,7 @@ export default function Home({ camId = 0 }) {
       <div className='flex flex-col gap-y-5 justify-center align-middle items-center'>
         <div className='bg-[#ecececee] rounded-[15px] text-black w-[40%] h-[40%] text-center'>
           <h1>Floor 1</h1>
-          <h2>Capacity: {count}/100</h2>
+          <h2>Capacity: {count}/{cap}</h2>
         </div>
         <div>
           <div className='Heatmap'>

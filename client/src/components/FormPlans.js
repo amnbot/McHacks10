@@ -31,13 +31,15 @@ export default function FormPlans() {
   const [name, setName] = useState("")
   const [abbrevation, setAbbrevation] = useState("")
   const [capacity, setCapacity] = useState(0)
+  const [cameraId, setCameraId] = useState(0)
 
   const addPlan = async (e) => {
     e.preventDefault();
     const submittedPlan = {
       name,
       abbrevation,
-      capacity
+      capacity,
+      cameraId,
     }
     console.log(submittedPlan)
     try {
@@ -102,6 +104,15 @@ export default function FormPlans() {
               </Stack>
             </li>
             <br></br>
+            <TextField
+              id="outlined-number"
+              label="Camera Id"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) => setCameraId(e.target.value)}
+            />
             <TextField
               id="outlined-number"
               label="Capacity"

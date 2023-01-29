@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from '@mui/material/Button';
 import Header from './Header';
@@ -14,56 +14,84 @@ import StairsIcon from '@mui/icons-material/Stairs';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
 
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firebase';
 
 
 export default function SearchGrid() {
-const bhys = [{path: '', icon: <VideoCameraBackIcon />, label: "Camera 1"}, {path: '', icon: <TerrainIcon />, label: "Camera 2"}, {path: '', icon: <StairsIcon />, label: "Floor 1"}, {path: '', icon: <ShuffleIcon />, label: "Floor 2"}, {path: '', icon: <CameraAltIcon />, label: "Camera 3"}, {path: '', icon: <RestoreIcon />, label: "Camera 4"}, {path: '', icon: <FavoriteIcon />, label: "Camera 5"}, {path: '', icon: <LocationOnIcon />, label: "Camera 6"}]
+  const navigate = useNavigate();
 
-const [searchTerm, setSearchTerm] = useState('');
-const [filteredData, setFilteredData] = useState(bhys);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+
+  const [plans, setPlans] = useState([]);
+
+  const fetchPost = async () => {
+
+    await getDocs(collection(db, "plans"))
+      .then((querySnapshot) => {
+        const newData = querySnapshot.docs
+          .map((doc) => ({ ...doc.data(), id: doc.id }));
+        setPlans(newData);
+        setFilteredData(newData);
+        console.log(newData);
+      })
+  }
+
+  useEffect(() => {
+    fetchPost();
+  }, [])
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   useEffect(() => {
-    setFilteredData(
-      bhys.filter((item) =>
-        item.label.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
+    if (searchTerm) {
+      setFilteredData(
+        plans.filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
   }, [searchTerm])
 
   return (
     <div>
-     <Header/>
-     <div className='flex justify-center items-center'>
-      <div className ="grid grid-cols-3 gap-10">
-      {/* <input
+      <Header />
+      <div className='flex justify-center align-middle items-center my-4'>
+
+        <TextField onChange={handleChange} sx={{ width: '40%' }} label="Search" id="fullWidth" color="info" />
+      </div>
+      <div className='flex justify-center items-center'>
+        <div className="grid grid-cols-3 gap-10">
+          {/* <input
         type="text"
         placeholder="Search..."
         value={searchTerm}
         onChange={handleChange}
       /> */}
-  <TextField onChange={handleChange} fullWidth label="Search" id="fullWidth" color = "info" />
-        {filteredData.map(({icon, label}) => {
+          {filteredData.map(({ abbrevation, name, cameraId, capacity, imgPath }) => {
             return (
-                <div className='flex flex-col text-center text-white'>
-                    <Button variant="contained" color="primary" style={{width :50, height:50}}>
-                    {icon}
-                    </Button>
-                    {label}
-                </div>
+              <div className='flex flex-col text-center text-white'>
+                <Button onClick={() => navigate('/',
+                  { state: { camId: cameraId, cap: capacity, imgPath } })} className='transition-transform hover:scale-110' variant="contained" color="primary" style={{ width: 75, height: 75 }}>
+                  {/* <VideoCameraBackIcon /> */}
+                  <h1>{abbrevation}</h1>
+                </Button>
+                <h1 className='text-center'>{name}</h1>
+              </div>
             )
-        })}
-        <div className='flex flex-col text-center text-white'>
-                    <Button variant="contained" color="primary" style={{width :50, height:50}}>
-                    <AddIcon />
-                    </Button>
-                    Add
-        </div>
-      {/* <Button variant="contained" color="primary" style={{width :50, height:50}}>
+          })}
+          <div className='flex flex-col text-center text-white'>
+            <Button onClick={() => navigate('/plan/create')} className='transition-transform hover:scale-110' variant="contained" color="primary" style={{ width: 75, height: 75 }}>
+              <AddIcon />
+            </Button>
+            <h1 className='text-center'>Add</h1>
+          </div>
+          {/* <Button variant="contained" color="primary" style={{width :50, height:50}}>
         <VideoCameraBackIcon/>
       </Button>
       <Button variant="contained" color="primary" style={{width :50, height:50}}>
@@ -91,12 +119,12 @@ const [filteredData, setFilteredData] = useState(bhys);
       <AddIcon/>
       </Button> */}
 
+        </div>
       </div>
-    </div>
-    </div>
-    
-  );
-  
+    </div >
 
-  
+  );
+
+
+
 }

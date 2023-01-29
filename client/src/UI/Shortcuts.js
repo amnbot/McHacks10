@@ -16,10 +16,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Shortcuts({ camId, setCamId }) {
   const navigate = useNavigate();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(camId);
   useEffect(() => {
     if (value === 3) {
-      navigate('/planCreation')
+      navigate('/plans')
     }
     console.log(value, 'new value')
     setCamId(value)
