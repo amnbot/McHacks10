@@ -25,7 +25,7 @@ export default function Shortcuts({ camId, setCamId }) {
     setCamId(value)
   }, [value])
   return (
-    <Box sx={{ width: 1920 }}>
+    <Box sx={{ width: 500 }}>
       <BottomNavigation
         showLabels
         value={value}

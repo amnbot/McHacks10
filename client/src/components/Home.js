@@ -100,7 +100,7 @@ export default function Home() {
         </div>
         <div>
           <div className='Heatmap'>
-            <canvas className='bg-white rounded-[15px]' width={640} height={480} />
+            <canvas  style={{ backgroundImage: "url(/3rd-ssmu.png)" }} className='rounded-[15px]' width={640} height={480} />
           </div>
           <div className='flex justify-center items-center my-5'>
             <img width={100} height={50} src={'legend.png'} className='rounded-lg' />
