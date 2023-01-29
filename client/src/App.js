@@ -1,20 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import logo from './logo.svg';
 import './App.css';
 import Counter from "./components/Counter";
 import TemporaryDrawer from "./UI/Sidebar";
+import FormPlans from "./UI/FormPlans";
 
+import TeamPage from "./components/Teampage";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Home from "./components/Home";
 function App() {
-  const [count, setCount] = useState(0)
-  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <button className="bg-slate-600 px-4 py-2 rounded-[15px]" onClick={() => setCount(count + 1)}>ADD</button>
-        <Counter count={count} />
-        <TemporaryDrawer />
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path="team" element={<TeamPage />} />
+        <Route path='plans' element={<FormPlans />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -11,6 +11,15 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+//by Paul
+import HomeIcon from '@mui/icons-material/Home';
+import ListIcon from '@mui/icons-material/List';
+import MapIcon from '@mui/icons-material/Map';
+import GroupsIcon from '@mui/icons-material/Groups';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+import { Link } from 'react-router-dom'
+
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     top: false,
@@ -35,20 +44,23 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {[{ name: 'Home', icon: <HomeIcon />, path: '/' },
+        { name: 'Plans', icon: <MapIcon />, path: '/plans' },
+        { name: 'Teams', icon: <GroupsIcon />, path: '/team' },
+        { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
+          <ListItem key={name} disablePadding>
+            <Link to={path}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+              <ListItemText primary={name} />
+            </Link>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Sign out'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -64,9 +76,11 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {['left', 'right', 'top', 'bottom'].map((anchor) => (
+      {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
+            <ListIcon />
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
