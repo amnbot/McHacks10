@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from "./components/Counter";
 import TemporaryDrawer from "./UI/Sidebar";
+import FormPlans from "./UI/FormPlans";
 
 import TeamPage from "./components/Teampage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="team" element={<TeamPage />} />
+        <Route path='plans' element={<FormPlans />} />
       </Routes>
     </BrowserRouter>
   );
