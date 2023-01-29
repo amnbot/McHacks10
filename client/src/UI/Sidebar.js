@@ -45,7 +45,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {[{ name: 'Home', icon: <HomeIcon />, path: '/' },
-        { name: 'Plans', icon: <MapIcon />, path: '/planCreation' },
+        { name: 'Plans', icon: <MapIcon />, path: '/plans' },
         { name: 'Teams', icon: <GroupsIcon />, path: '/team' },
         { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
           <ListItem key={name} disablePadding>
@@ -83,7 +83,7 @@ export default function TemporaryDrawer() {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
-            <ListIcon color='white' />
+            <ListIcon />
           </Button>
           <Drawer
             anchor={anchor}
