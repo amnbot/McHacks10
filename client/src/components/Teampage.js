@@ -5,7 +5,7 @@ import ListDivider from '@mui/joy/ListDivider';
 import ListItem from '@mui/joy/ListItem';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 
-export default function teamPage() {
+export default function TeamPage() {
   return (
     <List
       row

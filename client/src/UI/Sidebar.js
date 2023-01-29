@@ -18,6 +18,8 @@ import MapIcon from '@mui/icons-material/Map';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+import { Link } from 'react-router-dom'
+
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     top: false,
@@ -42,14 +44,17 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{name: 'Home', icon: <HomeIcon />}, {name: 'Plans', icon: <MapIcon/>}, {name: 'Teams', icon: <GroupsIcon/>}, {name: 'Settings', icon: <SettingsIcon/>}].map(({name, icon}, index) => (
+        {[{ name: 'Home', icon: <HomeIcon />, path: '/' },
+        { name: 'Plans', icon: <MapIcon />, path: '/plans' },
+        { name: 'Teams', icon: <GroupsIcon />, path: '/team' },
+        { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton>
-              <ListItemIcon> 
+            <Link to={path}>
+              <ListItemIcon>
                 {icon}
               </ListItemIcon>
               <ListItemText primary={name} />
-            </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -74,8 +79,8 @@ export default function TemporaryDrawer() {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
-          <ListIcon/>
-            </Button>
+            <ListIcon />
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -85,6 +90,6 @@ export default function TemporaryDrawer() {
           </Drawer>
         </React.Fragment>
       ))}
-    </div> 
+    </div>
   );
 }
