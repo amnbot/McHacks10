@@ -6,7 +6,12 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-export default function Shortcuts() {
+import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+import TerrainIcon from '@mui/icons-material/Terrain';
+import StairsIcon from '@mui/icons-material/Stairs';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+
+export default function Shortcuts({camId, setCamId}) {
   const [value, setValue] = React.useState(0);
 
   return (
@@ -18,10 +23,11 @@ export default function Shortcuts() {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="Camera 1" icon={<VideoCameraBackIcon />} />
+        <BottomNavigationAction label="Camera 2" icon={<TerrainIcon />} />
+        <BottomNavigationAction label="Floor 1" icon={<StairsIcon />} />
+        <BottomNavigationAction label="Floor 2" icon={<ShuffleIcon />} />
+
       </BottomNavigation>
     </Box>
   );
