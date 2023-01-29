@@ -26,7 +26,7 @@ export default function Home({ camId = 0 }) {
         var max = 2;
         var width = 640;
         var height = 480;
-        var len = 200;
+        var len = 100;
 
         while (len--) {
           var val = Math.floor(Math.random() * 100);
@@ -90,13 +90,16 @@ export default function Home({ camId = 0 }) {
     <div>
       <Header />
       <div className='flex flex-col gap-y-5 justify-center align-middle items-center'>
-        <div className='bg-[#ecececee] rounded-[15px] text-black w-[50%] h-[50%] text-center'>
+        <div className='bg-[#ecececee] rounded-[15px] text-black w-[40%] h-[40%] text-center'>
           <h1>Floor 1</h1>
           <h2>Capacity: {count}/100</h2>
         </div>
         <div>
           <div className='Heatmap'>
             <canvas className='bg-white rounded-[15px]' width={640} height={480} />
+          </div>
+          <div className='flex justify-center items-center my-5'>
+            <img width={100} height={50} src={'legend.png'} className='rounded-lg' />
           </div>
         </div>
         <Shortcuts camId={currCamId} setCamId={setCamId} />

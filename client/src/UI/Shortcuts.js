@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -11,7 +11,7 @@ import TerrainIcon from '@mui/icons-material/Terrain';
 import StairsIcon from '@mui/icons-material/Stairs';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 
-export default function Shortcuts({camId, setCamId}) {
+export default function Shortcuts({ camId, setCamId }) {
   const [value, setValue] = React.useState(0);
   useEffect(() => {
     console.log(value, 'new value')
@@ -26,12 +26,13 @@ export default function Shortcuts({camId, setCamId}) {
           setValue(newValue);
         }}
       >
+
         <BottomNavigationAction label="Camera 1" icon={<VideoCameraBackIcon />} />
         <BottomNavigationAction label="Camera 2" icon={<TerrainIcon />} />
         <BottomNavigationAction label="Floor 1" icon={<StairsIcon />} />
         <BottomNavigationAction label="Floor 2" icon={<ShuffleIcon />} />
 
       </BottomNavigation>
-    </Box>
+    </Box >
   );
 }
