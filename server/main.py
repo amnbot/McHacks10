@@ -46,8 +46,8 @@ def snapshot():
                 break
         cap.release()
         cv2.destroyAllWindows()
-        print(keypoints_with_scores)
-        return json.dumps(keypoints_with_scores)
+        print(PD.mean_per_person)
+        return json.dumps(PD.mean_per_person)
 
 
 if __name__ == "__main__":

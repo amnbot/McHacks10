@@ -48,18 +48,33 @@ class PoseDetector:
 
     # Function to loop through each person detected and render
     def loop_through_people(self, frame, keypoints_with_scores, edges, confidence_threshold):
+        self.mean_per_person = []
         for person in keypoints_with_scores:
             self.draw_connections(frame, person, edges, confidence_threshold)
-            self.draw_keypoints(frame, person, confidence_threshold)
+            self.mean_per_person.append(self.draw_keypoints(frame, person, confidence_threshold))
 
     def draw_keypoints(self, frame, keypoints, confidence_threshold):
         y, x, c = frame.shape
         shaped = np.squeeze(np.multiply(keypoints, [y,x,1]))
         
+        sum_x = 0
+        sum_y = 0
+        sum = 0
         for kp in shaped:
             ky, kx, kp_conf = kp
             if kp_conf > confidence_threshold:
+                if (sum > 5): break
+                sum_x += kx
+                sum_y += ky
+                sum += 1
                 cv2.circle(frame, (int(kx), int(ky)), 6, (0,255,0), -1)
+        
+        # print(sum_x, sum_y, sum)
+        x_, y_ = 0, 0
+        if sum > 0:
+            x_,y_ = sum_x/sum, sum_y/sum
+            cv2.circle(frame, (int(kx), int(ky)), 6, (255,0,0), -1)
+        return x_, y_
 
     def getResults(self, input_img):
         return self.movenet(input_img)
@@ -96,7 +111,7 @@ class PoseDetector:
 
 if __name__ == "__main__":
     PD = PoseDetector()
-    cap = cv2.VideoCapture('http://10.122.19.79:8080/video')
+    cap = cv2.VideoCapture('crowd3.mp4')
     index = 0
     keypoints_with_scores = []
     while cap.isOpened():
@@ -114,6 +129,14 @@ if __name__ == "__main__":
         
         # Render keypoints 
         PD.loop_through_people(frame, keypoints_with_scores, PD.EDGES, 0.1)
+        print(PD.mean_per_person)
+
+        # x_val = [x[0] for x in PD.mean_per_person]
+        # y_val = [y[0] for y in PD.mean_per_person]
+        # plt.plot(x_val,y_val)
+        # plt.plot(x_val,y_val,'or')
+        # plt.scatter(*zip(*PD.mean_per_person))
+        # plt.show()
         
         cv2.imshow('Movenet Multipose', frame)
         index += 1
