@@ -50,10 +50,14 @@ export default function TemporaryDrawer() {
         { name: 'Settings', icon: <SettingsIcon />, path: '/settings' }].map(({ name, icon, path }, index) => (
           <ListItem key={name} disablePadding>
             <Link to={path}>
-              <ListItemIcon>
-                {icon}
-              </ListItemIcon>
-              <ListItemText primary={name} />
+              <div className='flex flex-row my-2'>
+                <div className='flex ml-1 mt-1 align-middle'>
+                  <ListItemIcon>
+                    {icon}
+                  </ListItemIcon>
+                </div>
+                <ListItemText primary={name} />
+              </div>
             </Link>
           </ListItem>
         ))}

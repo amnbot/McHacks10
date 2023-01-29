@@ -18,6 +18,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="team" element={<TeamPage />} />
         <Route path='plans' element={<SearchGrid />} />
+        <Route path='plan/create' element={<FormPlans />} />
       </Routes>
     </BrowserRouter>
   );
