@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiButton-root {
+  background: linear-gradient(to right, #704fe3, #b570e4)!important;
+}

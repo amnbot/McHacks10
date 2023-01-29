@@ -10,10 +10,15 @@ export default function Home() {
   const [count, setCount] = useState(0)
   const [points, setPoints] = useState([])  
   const [heatmap, setHeatmap] = useState(null)
+  
   const location = useLocation()
-  const camId = location.state.camId
-  const cap = location.state.cap
-  const imgPath = location.state.imgPath
+  console.log('location', location)
+  const state = location.state
+  const camId = state === null ? 0 : state.camId
+  const cap = state === null ? 100 : state.cap
+  const imgPath = state === null ? 0 : state.imgPath
+  const name = state === null ? 'Test' : state.name
+
   const [currCamId, setCamId] = useState(camId)
   // const [heatmap, setHeatmap] = useState(heatmapInstance)
   useEffect(() => {
@@ -45,7 +50,7 @@ export default function Home() {
         // heatmap data format
         setPoints(mockPoints)
       }
-    }, 10000)
+    }, 1000)
 
     return () => clearInterval(interval)
   }, [currCamId])
@@ -94,15 +99,15 @@ export default function Home() {
     <div>
       <Header />
       <div className='flex flex-col gap-y-5 justify-center align-middle items-center'>
-        <div className='bg-[#ecececee] rounded-[15px] text-black w-[40%] h-[40%] text-center'>
-          <h1>Floor 1</h1>
-          <h2>Capacity: {count}/{cap}</h2>
+        <div className='bg-[#2a2e3d] rounded-[15px] text-[#e8e8ff] w-[30%] h-[30%] text-center py-1'>
+          <h1 className='font-extrabold tracking-widest'>Current location: {name}</h1>
+          <h2 className='font-medium tracking-widest'>Capacity: {count}/{cap}</h2>
         </div>
         <div>
           <div className='Heatmap'>
-            <canvas  style={{ backgroundImage: "url(/3rd-ssmu.png)" }} className='rounded-[15px]' width={640} height={480} />
+            <canvas style={{ backgroundImage: `url(/${imgPath})` }} className='rounded-[15px]' width={640} height={480} />
           </div>
-          <div className='flex justify-center items-center my-5'>
+          <div className='flex justify-center items-center my-1'>
             <img width={100} height={50} src={'legend.png'} className='rounded-lg' />
           </div>
         </div>

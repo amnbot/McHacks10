@@ -56,7 +56,7 @@ export default function TemporaryDrawer() {
                     {icon}
                   </ListItemIcon>
                 </div>
-                <ListItemText primary={name} />
+                <ListItemText style={{fontWeight: 'bold'}} primary={name} />
               </div>
             </Link>
           </ListItem>
@@ -82,7 +82,7 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
+          <Button  className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
             <ListIcon />
           </Button>
           <Drawer
