@@ -79,7 +79,7 @@ export default function TemporaryDrawer() {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button className="text-center sm:text-left" onClick={toggleDrawer(anchor, true)}>
-            <ListIcon color='white' />
+            <ListIcon />
           </Button>
           <Drawer
             anchor={anchor}
